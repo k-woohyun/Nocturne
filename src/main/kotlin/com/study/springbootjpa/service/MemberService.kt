@@ -43,6 +43,11 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.save(beforeMemberInfo)
     }
 
+    fun deleteMember(userId: String) {
+        val member = memberRepository.findByUserId(userId)
+        return memberRepository.delete(member)
+    }
+
     companion object {
         private val logger = LoggerFactory.getLogger(MemberService::class.java)
     }

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -51,6 +52,13 @@ class MemberController(private val memberService: MemberService) {
         @RequestBody member: Member,
     ): Member {
         return memberService.putMember(userId, member)
+    }
+
+    @DeleteMapping("/api/v1/members/{userId}")
+    fun deleteMember(
+        @PathVariable userId: String,
+    ) {
+        return memberService.deleteMember(userId)
     }
 
     companion object {
