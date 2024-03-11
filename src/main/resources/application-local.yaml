@@ -1,7 +1,14 @@
+server:
+  port: 9809
+  tomcat:
+    uri-encoding: UTF-8
+
 spring:
+  config:
+    activate:
+      on-profile: local
   datasource:
-    hikari:
-      url: jdbc:mysql://localhost:3306/
+      url: jdbc:mysql://localhost:3306/jpaUsers?autoReconnect=true
       username: root
       password: dngus8940
       driver-class-name: com.mysql.jdbc.Driver
@@ -13,6 +20,6 @@ spring:
     show-sql: false
     properties:
       hibernate:
+        storage_engine: innodb
         format_sql: true
         use_sql_comments: true
-
