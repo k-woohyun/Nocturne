@@ -12,11 +12,15 @@ import jakarta.persistence.Table
 data class Member(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
+    val id: Long,
     @Column(name = "email")
     var email: String,
     @Column(name = "last_name")
     var lastName: String,
     @Column(name = "first_name")
     var firstName: String,
+    @Column(name = "phone")
+    var phone: String,
+    @Column(name = "user_id")
+    var userId: String,
 )

@@ -31,6 +31,18 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.save(beforeMemberInfo)
     }
 
+    fun putMember(
+        userId: String,
+        member: Member,
+    ): Member {
+        val beforeMemberInfo = memberRepository.findByUserId(userId)
+        beforeMemberInfo.phone = member.phone
+        beforeMemberInfo.lastName = member.lastName
+        beforeMemberInfo.firstName = member.firstName
+        beforeMemberInfo.email = member.email
+        return memberRepository.save(beforeMemberInfo)
+    }
+
     companion object {
         private val logger = LoggerFactory.getLogger(MemberService::class.java)
     }

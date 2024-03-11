@@ -12,5 +12,7 @@ interface MemberRepository : JpaRepository<Member, Long> {
 
     fun findByEmail(email: String): Member
 
+    fun findByUserId(userId: String): Member
+
     fun save(member: Member): Member
 }
