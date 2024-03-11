@@ -21,6 +21,16 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.save(member)
     }
 
+    fun patchMember(
+        email: String,
+        member: Member,
+    ): Member {
+        val beforeMemberInfo = memberRepository.findByEmail(email)
+        beforeMemberInfo.lastName = member.lastName
+        beforeMemberInfo.firstName = member.firstName
+        return memberRepository.save(beforeMemberInfo)
+    }
+
     companion object {
         private val logger = LoggerFactory.getLogger(MemberService::class.java)
     }
