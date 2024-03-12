@@ -11,7 +11,7 @@ spring:
       url: jdbc:mysql://localhost:3306/jpaUsers?autoReconnect=true
       username: root
       password: dngus8940
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect

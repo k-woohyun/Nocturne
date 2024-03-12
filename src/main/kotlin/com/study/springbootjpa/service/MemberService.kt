@@ -17,11 +17,11 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.findByEmail(email)
     }
 
-    fun createMember(member: Member): Member {
-        return memberRepository.save(member)
+    fun createMember(requestMember: Member): Member {
+        return memberRepository.save(requestMember)
     }
 
-    fun patchMember(
+    fun updateMemberInfo(
         email: String,
         member: Member,
     ): Member {
@@ -31,11 +31,11 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.save(beforeMemberInfo)
     }
 
-    fun putMember(
-        userId: String,
+    fun updateMember(
+        userName: String,
         member: Member,
     ): Member {
-        val beforeMemberInfo = memberRepository.findByUserId(userId)
+        val beforeMemberInfo = memberRepository.findByUserName(userName)
         beforeMemberInfo.phone = member.phone
         beforeMemberInfo.lastName = member.lastName
         beforeMemberInfo.firstName = member.firstName
@@ -43,8 +43,8 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.save(beforeMemberInfo)
     }
 
-    fun deleteMember(userId: String) {
-        val member = memberRepository.findByUserId(userId)
+    fun deleteMember(userName: String) {
+        val member = memberRepository.findByUserName(userName)
         return memberRepository.delete(member)
     }
 

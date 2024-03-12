@@ -21,6 +21,6 @@ data class Member(
     var firstName: String,
     @Column(name = "phone")
     var phone: String,
-    @Column(name = "user_id")
-    var userId: String,
+    @Column(name = "user_name")
+    var userName: String,
 )

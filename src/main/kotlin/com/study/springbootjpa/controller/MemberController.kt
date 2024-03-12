@@ -33,32 +33,32 @@ class MemberController(private val memberService: MemberService) {
 
     @PostMapping("/api/v1/members")
     fun createMember(
-        @RequestBody member: Member,
+        @RequestBody requestMember: Member,
     ): Member {
-        return memberService.createMember(member)
+        return memberService.createMember(requestMember)
     }
 
     @PatchMapping("/api/v1/members/{email}")
-    fun patchMember(
+    fun updateMemberInfo(
         @PathVariable email: String,
         @RequestBody member: Member,
     ): Member {
-        return memberService.patchMember(email, member)
+        return memberService.updateMemberInfo(email, member)
     }
 
-    @PutMapping("/api/v1/members/{userId}")
-    fun putMember(
-        @PathVariable userId: String,
+    @PutMapping("/api/v1/members/{userName}")
+    fun updateMember(
+        @PathVariable userName: String,
         @RequestBody member: Member,
     ): Member {
-        return memberService.putMember(userId, member)
+        return memberService.updateMember(userName, member)
     }
 
-    @DeleteMapping("/api/v1/members/{userId}")
+    @DeleteMapping("/api/v1/members/{userName}")
     fun deleteMember(
-        @PathVariable userId: String,
+        @PathVariable userName: String,
     ) {
-        return memberService.deleteMember(userId)
+        return memberService.deleteMember(userName)
     }
 
     companion object {
