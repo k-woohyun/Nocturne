@@ -22,5 +22,5 @@ data class Member(
     @Column(name = "phone")
     var phone: String,
     @Column(name = "user_name")
-    var userName: String,
+    var username: String,
 )

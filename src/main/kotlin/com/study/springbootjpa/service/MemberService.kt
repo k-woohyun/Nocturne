@@ -17,8 +17,14 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.findByEmail(email)
     }
 
-    fun createMember(requestMember: Member): Member {
-        return memberRepository.save(requestMember)
+    fun createMember(requestMember: Member): String {
+        val checkUser = memberRepository.existsByUsername(requestMember.username)
+        return if (checkUser) {
+            memberRepository.save(requestMember)
+            "회원 등록 완료"
+        } else {
+            "중복된 회원 입니다."
+        }
     }
 
     fun updateMemberInfo(
@@ -35,7 +41,7 @@ class MemberService(private val memberRepository: MemberRepository) {
         userName: String,
         member: Member,
     ): Member {
-        val beforeMemberInfo = memberRepository.findByUserName(userName)
+        val beforeMemberInfo = memberRepository.findByUsername(userName)
         beforeMemberInfo.phone = member.phone
         beforeMemberInfo.lastName = member.lastName
         beforeMemberInfo.firstName = member.firstName
@@ -44,7 +50,7 @@ class MemberService(private val memberRepository: MemberRepository) {
     }
 
     fun deleteMember(userName: String) {
-        val member = memberRepository.findByUserName(userName)
+        val member = memberRepository.findByUsername(userName)
         return memberRepository.delete(member)
     }
 

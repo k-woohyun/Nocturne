@@ -8,9 +8,9 @@ spring:
     activate:
       on-profile: local
   datasource:
-      url: jdbc:mysql://localhost:3306/jpaUsers?autoReconnect=true
+      url: jdbc:mysql://localhost:3306/springbootjpa?autoReconnect=true
       username: root
-      password: dngus8940
+      password:
       driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql
