@@ -19,11 +19,12 @@ class MemberService(private val memberRepository: MemberRepository) {
 
     fun createMember(requestMember: Member): String {
         val checkUser = memberRepository.existsByUsername(requestMember.username)
+        logger.info("checkUser ::: {}", checkUser)
         return if (checkUser) {
+            "중복된 회원 입니다."
+        } else {
             memberRepository.save(requestMember)
             "회원 등록 완료"
-        } else {
-            "중복된 회원 입니다."
         }
     }
 
