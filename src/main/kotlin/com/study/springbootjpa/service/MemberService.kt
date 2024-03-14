@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class MemberService(private val memberRepository: MemberRepository) {
@@ -17,17 +18,17 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.findByEmail(email)
     }
 
-    fun createMember(requestMember: Member): String {
-        val checkUser = memberRepository.existsByUsername(requestMember.username)
-        logger.info("checkUser ::: {}", checkUser)
+    @Transactional
+    fun createMember(member: Member): Member {
+        val checkUser = memberRepository.existsByUsername(member.username)
         return if (checkUser) {
-            "중복된 회원 입니다."
+            throw Exception("이미 등록된 회원정보입니다.")
         } else {
-            memberRepository.save(requestMember)
-            "회원 등록 완료"
+            memberRepository.save(member)
         }
     }
 
+    @Transactional
     fun updateMemberInfo(
         email: String,
         member: Member,
@@ -38,20 +39,20 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.save(beforeMemberInfo)
     }
 
+    @Transactional
     fun updateMember(
-        userName: String,
-        member: Member,
-    ): Member {
-        val beforeMemberInfo = memberRepository.findByUsername(userName)
-        beforeMemberInfo.phone = member.phone
-        beforeMemberInfo.lastName = member.lastName
-        beforeMemberInfo.firstName = member.firstName
-        beforeMemberInfo.email = member.email
-        return memberRepository.save(beforeMemberInfo)
+        usernames: List<String>,
+        modifiedMembers: List<Member>,
+    ): List<Member> {
+        usernames.forEach {
+            val fetchedMember = memberRepository.findByUsername(it)
+            memberRepository.save(fetchedMember)
+        }
+        return modifiedMembers
     }
 
-    fun deleteMember(userName: String) {
-        val member = memberRepository.findByUsername(userName)
+    fun deleteMember(username: String) {
+        val member = memberRepository.findByUsername(username)
         return memberRepository.delete(member)
     }
 
