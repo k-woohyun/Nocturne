@@ -27,7 +27,7 @@ class MemberController(private val memberService: MemberService) {
     @GetMapping("/api/v1/members/{email}")
     fun findByEmail(
         @PathVariable email: String,
-    ): Member {
+    ): Member? {
         return memberService.findByEmail(email)
     }
 
@@ -47,11 +47,11 @@ class MemberController(private val memberService: MemberService) {
     }
 
     @PutMapping("/api/v1/members/{usernames}")
-    fun updateMember(
+    fun updateMembers(
         @PathVariable usernames: List<String>,
         @RequestBody modifiedMembers: List<Member>,
     ): List<Member> {
-        return memberService.updateMember(usernames, modifiedMembers)
+        return memberService.updateMembers(usernames, modifiedMembers)
     }
 
     @DeleteMapping("/api/v1/members/{username}")

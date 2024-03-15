@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.lang.NullPointerException
 
 @Service
 class MemberService(private val memberRepository: MemberRepository) {
@@ -14,15 +15,15 @@ class MemberService(private val memberRepository: MemberRepository) {
         return memberRepository.findAll(pageable)
     }
 
-    fun findByEmail(email: String): Member {
-        return memberRepository.findByEmail(email)
+    fun findByEmail(email: String): Member? {
+        return memberRepository.findByEmail(email) ?: throw NullPointerException("찾으시는 회원 정보가 없습니다.")
     }
 
     @Transactional
     fun createMember(member: Member): Member {
         val checkUser = memberRepository.existsByUsername(member.username)
         return if (checkUser) {
-            throw Exception("이미 등록된 회원정보입니다.")
+            throw Exception("이미 등록된 회원 정보 입니다.")
         } else {
             memberRepository.save(member)
         }
@@ -34,26 +35,38 @@ class MemberService(private val memberRepository: MemberRepository) {
         member: Member,
     ): Member {
         val beforeMemberInfo = memberRepository.findByEmail(email)
-        beforeMemberInfo.lastName = member.lastName
-        beforeMemberInfo.firstName = member.firstName
-        return memberRepository.save(beforeMemberInfo)
+        return if (beforeMemberInfo == null) {
+            throw Exception("변경 요청한 회원 정보가 없습니다.")
+        } else {
+            beforeMemberInfo.lastName = member.lastName
+            beforeMemberInfo.firstName = member.firstName
+            memberRepository.save(beforeMemberInfo)
+        }
     }
 
     @Transactional
-    fun updateMember(
+    fun updateMembers(
         usernames: List<String>,
         modifiedMembers: List<Member>,
     ): List<Member> {
         usernames.forEach {
             val fetchedMember = memberRepository.findByUsername(it)
-            memberRepository.save(fetchedMember)
+            if (fetchedMember == null) {
+                throw Exception("변경하 실 회원 정보 리스트 일부에 회원 정보가 없습니다.")
+            } else {
+                memberRepository.save(fetchedMember)
+            }
         }
         return modifiedMembers
     }
 
     fun deleteMember(username: String) {
         val member = memberRepository.findByUsername(username)
-        return memberRepository.delete(member)
+        return if (member == null) {
+            throw Exception("삭제 요청한 회원 정보가 없습니다.")
+        } else {
+            memberRepository.delete(member)
+        }
     }
 
     companion object {
