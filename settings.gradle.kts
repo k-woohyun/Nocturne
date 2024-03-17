@@ -1,1 +1,1 @@
-rootProject.name = "springboot-jpa"
+rootProject.name = "nocturne"
