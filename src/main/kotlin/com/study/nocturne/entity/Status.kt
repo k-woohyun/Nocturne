@@ -1,4 +1,4 @@
-package com.study.springbootjpa.entity
+package com.study.nocturne.entity
 
 enum class Status {
     CREATE,

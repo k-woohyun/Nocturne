@@ -1,4 +1,4 @@
-package com.study.springbootjpa
+package com.study.nocturne
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class SpringbootJpaApplication
 
 fun main(args: Array<String>) {
-	runApplication<SpringbootJpaApplication>(*args)
+    runApplication<SpringbootJpaApplication>(*args)
 }

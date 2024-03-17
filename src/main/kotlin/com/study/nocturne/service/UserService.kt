@@ -1,8 +1,8 @@
-package com.study.springbootjpa.service
+package com.study.nocturne.service
 
-import com.study.springbootjpa.entity.Status
-import com.study.springbootjpa.entity.User
-import com.study.springbootjpa.repository.UserRepository
+import com.study.nocturne.entity.Status
+import com.study.nocturne.entity.User
+import com.study.nocturne.repository.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

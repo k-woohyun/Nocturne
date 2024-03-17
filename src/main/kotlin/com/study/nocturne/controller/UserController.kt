@@ -1,9 +1,9 @@
 @file:Suppress("ktlint:standard:no-wildcard-imports")
 
-package com.study.springbootjpa.controller
+package com.study.nocturne.controller
 
-import com.study.springbootjpa.entity.User
-import com.study.springbootjpa.service.UserService
+import com.study.nocturne.entity.User
+import com.study.nocturne.service.UserService
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
