@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:no-wildcard-imports")
+
 package com.study.springbootjpa.controller
 
 import com.study.springbootjpa.entity.User
