@@ -1,15 +1,11 @@
 package com.study.springbootjpa.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Entity
-@Table(name = "member")
-data class Member(
+@Table(name = "user")
+data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
@@ -23,4 +19,8 @@ data class Member(
     var phone: String,
     @Column(name = "user_name")
     var username: String,
+    @Column(name = "status")
+    var status: String,
+    @Column(name = "delete_at")
+    var deleteAt: LocalDateTime,
 )
