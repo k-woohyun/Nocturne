@@ -20,7 +20,7 @@ data class User(
     @Column(name = "user_name")
     var username: String,
     @Column(name = "status")
-    var status: String,
+    var status: Status,
     @Column(name = "delete_at")
     var deleteAt: LocalDateTime,
 )
